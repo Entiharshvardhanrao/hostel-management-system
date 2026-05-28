@@ -1,45 +1,792 @@
-```html id="lt3s3q"
+```html
 {% extends 'base.html' %}
 
 {% block content %}
 
-<h2 class="mb-4">Leave Management</h2>
+<!-- PREMIUM HEADER -->
 
-<div class="table-section">
+<div class="premium-header mb-4">
 
-<table class="table table-hover">
+    <div>
 
-    <thead class="table-dark">
+        <h1 class="premium-title">
+            Leave Management
+        </h1>
 
-        <tr>
-            <th>ID</th>
-            <th>Student</th>
-            <th>Reason</th>
-            <th>Status</th>
-        </tr>
+        <p class="premium-subtitle">
+            Track and manage hostel leave requests
+        </p>
 
-    </thead>
+    </div>
 
-    <tbody>
+    <div class="d-flex gap-3">
 
-        {% for leave in leaves %}
+        <button class="btn btn-light btn-lg shadow-sm">
 
-        <tr>
+            <i class="fa fa-download"></i>
+            Export
 
-            <td>{{ leave.id }}</td>
-            <td>{{ leave.student }}</td>
-            <td>{{ leave.reason }}</td>
-            <td>{{ leave.status }}</td>
+        </button>
 
-        </tr>
+        <a href="/admin/leave_management/leave/add/"
+           class="btn btn-success btn-lg shadow">
 
-        {% endfor %}
+            <i class="fa fa-plus"></i>
+            Add Leave
 
-    </tbody>
+        </a>
 
-</table>
+    </div>
 
 </div>
+
+
+
+
+<!-- ANALYTICS CARDS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+
+        <div class="ultra-card green-card">
+
+            <div>
+
+                <h6>Total Leaves</h6>
+
+                <h1>{{ leaves|length }}</h1>
+
+                <p>This Month</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-calendar"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card orange-card">
+
+            <div>
+
+                <h6>Pending</h6>
+
+                <h1>12</h1>
+
+                <p>Need Approval</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-clock"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card blue-card">
+
+            <div>
+
+                <h6>Approved</h6>
+
+                <h1>28</h1>
+
+                <p>Successfully Approved</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-check-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card red-card">
+
+            <div>
+
+                <h6>Rejected</h6>
+
+                <h1>4</h1>
+
+                <p>Rejected Requests</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-times-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- SEARCH + FILTER -->
+
+<div class="premium-box mb-4">
+
+    <div class="row g-3">
+
+        <div class="col-md-5">
+
+            <div class="search-box">
+
+                <i class="fa fa-search"></i>
+
+                <input type="text"
+                       placeholder="Search leave requests...">
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <select class="form-select premium-select">
+
+                <option>All Status</option>
+                <option>Pending</option>
+                <option>Approved</option>
+                <option>Rejected</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <select class="form-select premium-select">
+
+                <option>All Types</option>
+                <option>Medical</option>
+                <option>Personal</option>
+                <option>Emergency</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <button class="btn btn-dark premium-btn w-100">
+
+                <i class="fa fa-filter"></i>
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- LEAVE TABLE -->
+
+<div class="premium-box">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Leave Requests
+            </h3>
+
+            <p class="text-muted">
+                Manage student leave applications
+            </p>
+
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button class="btn btn-success">
+                <i class="fa fa-file-excel"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="fa fa-file-pdf"></i>
+            </button>
+
+            <button class="btn btn-primary">
+                <i class="fa fa-print"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-responsive">
+
+        <table class="table premium-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Reason</th>
+                    <th>Days</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for leave in leaves %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            #{{ leave.id }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="student-avatar">
+
+                                {{ leave.student.name|slice:":1" }}
+
+                            </div>
+
+                            <div>
+
+                                <h6 class="mb-0">
+                                    {{ leave.student.name }}
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+
+                        {{ leave.reason }}
+
+                    </td>
+
+                    <td>
+
+                        3 Days
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-warning px-3 py-2">
+
+                            {{ leave.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="progress"
+                             style="height:10px; border-radius:20px;">
+
+                            <div class="progress-bar bg-success"
+                                 style="width:75%;"></div>
+
+                        </div>
+
+                        <small>75%</small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/admin/leave_management/leave/{{ leave.id }}/change/"
+                               class="btn btn-sm btn-primary">
+
+                                <i class="fa fa-edit"></i>
+
+                            </a>
+
+                            <button class="btn btn-sm btn-danger">
+
+                                <i class="fa fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHARTS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Leave Status Analytics
+                </h4>
+
+                <span class="badge bg-success p-2">
+                    Live
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="leaveChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Monthly Leave Trend
+                </h4>
+
+                <span class="badge bg-primary p-2">
+                    Updated
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="trendChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-plus-circle"></i>
+
+            <h4>Add Leave</h4>
+
+            <p>Create new leave request</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-chart-pie"></i>
+
+            <h4>Analytics</h4>
+
+            <p>View leave statistics</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-file-export"></i>
+
+            <h4>Export Report</h4>
+
+            <p>Generate leave reports</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('leaveChart'), {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: ['Approved', 'Pending', 'Rejected'],
+
+        datasets: [{
+
+            data: [28, 12, 4],
+
+            backgroundColor: [
+                '#16a34a',
+                '#f59e0b',
+                '#dc2626'
+            ],
+
+            borderWidth:0
+
+        }]
+
+    },
+
+    options: {
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+
+
+
+new Chart(document.getElementById('trendChart'), {
+
+    type:'line',
+
+    data: {
+
+        labels:[
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun'
+        ],
+
+        datasets:[{
+
+            label:'Leaves',
+
+            data:[5,12,18,10,22,30],
+
+            borderColor:'#2563eb',
+
+            backgroundColor:'rgba(37,99,235,0.1)',
+
+            fill:true,
+
+            tension:0.4
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+</script>
+
+
+
+
+<style>
+
+.premium-header{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.premium-title{
+
+    font-size:42px;
+    font-weight:700;
+    color:#071a52;
+
+}
+
+.premium-subtitle{
+
+    color:gray;
+    font-size:18px;
+
+}
+
+.ultra-card{
+
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+}
+
+.ultra-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.blue-card{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.green-card{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.orange-card{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red-card{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.card-icon{
+
+    font-size:60px;
+    opacity:0.9;
+
+}
+
+.premium-box{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+.search-box{
+
+    background:#f4f7fb;
+    border-radius:15px;
+    padding:15px;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.search-box input{
+
+    border:none;
+    background:transparent;
+    width:100%;
+    outline:none;
+    margin-left:10px;
+
+}
+
+.premium-select{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.premium-btn{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.student-avatar{
+
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:bold;
+
+    margin-right:15px;
+
+}
+
+.premium-table thead{
+
+    background:#071a52;
+    color:white;
+
+}
+
+.premium-table thead th{
+
+    padding:18px;
+
+}
+
+.premium-table tbody tr{
+
+    transition:0.3s;
+
+}
+
+.premium-table tbody tr:hover{
+
+    background:#f4f7fb;
+
+}
+
+.premium-table tbody td{
+
+    padding:18px;
+
+}
+
+.premium-action{
+
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+    transition:0.4s;
+
+}
+
+.premium-action:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.premium-action i{
+
+    font-size:60px;
+    margin-bottom:20px;
+    color:#16a34a;
+
+}
+
+</style>
 
 {% endblock %}
 ```

@@ -1,45 +1,797 @@
-```html id="x2t7ci"
 {% extends 'base.html' %}
 
 {% block content %}
 
-<h2 class="mb-4">Complaints Management</h2>
+<!-- PREMIUM HEADER -->
 
-<div class="table-section">
+<div class="premium-header mb-4">
 
-<table class="table table-hover">
+    <div>
 
-    <thead class="table-dark">
+        <h1 class="premium-title">
+            Complaints Management
+        </h1>
 
-        <tr>
-            <th>ID</th>
-            <th>Student</th>
-            <th>Title</th>
-            <th>Status</th>
-        </tr>
+        <p class="premium-subtitle">
+            Monitor and resolve hostel complaints efficiently
+        </p>
 
-    </thead>
+    </div>
 
-    <tbody>
+    <div class="d-flex gap-3">
 
-        {% for complaint in complaints %}
+        <button class="btn btn-light btn-lg shadow-sm">
 
-        <tr>
+            <i class="fa fa-download"></i>
+            Export
 
-            <td>{{ complaint.id }}</td>
-            <td>{{ complaint.student }}</td>
-            <td>{{ complaint.title }}</td>
-            <td>{{ complaint.status }}</td>
+        </button>
 
-        </tr>
+        <a href="/admin/complaints/complaint/add/"
+           class="btn btn-danger btn-lg shadow">
 
-        {% endfor %}
+            <i class="fa fa-plus"></i>
+            Add Complaint
 
-    </tbody>
+        </a>
 
-</table>
+    </div>
 
 </div>
 
+
+
+
+<!-- ANALYTICS CARDS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+
+        <div class="ultra-card red-card">
+
+            <div>
+
+                <h6>Total Complaints</h6>
+
+                <h1>{{ complaints|length }}</h1>
+
+                <p>Registered Complaints</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-exclamation-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card orange-card">
+
+            <div>
+
+                <h6>Pending</h6>
+
+                <h1>8</h1>
+
+                <p>Waiting For Action</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-clock"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card green-card">
+
+            <div>
+
+                <h6>Resolved</h6>
+
+                <h1>24</h1>
+
+                <p>Successfully Solved</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-check-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card blue-card">
+
+            <div>
+
+                <h6>High Priority</h6>
+
+                <h1>3</h1>
+
+                <p>Urgent Complaints</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-bolt"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- SEARCH SECTION -->
+
+<div class="premium-box mb-4">
+
+    <div class="row g-3">
+
+        <div class="col-md-5">
+
+            <div class="search-box">
+
+                <i class="fa fa-search"></i>
+
+                <input type="text"
+                       placeholder="Search complaints...">
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <select class="form-select premium-select">
+
+                <option>All Status</option>
+                <option>Pending</option>
+                <option>Resolved</option>
+                <option>Rejected</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <select class="form-select premium-select">
+
+                <option>Priority</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <button class="btn btn-dark premium-btn w-100">
+
+                <i class="fa fa-filter"></i>
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- COMPLAINT TABLE -->
+
+<div class="premium-box">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Complaints Records
+            </h3>
+
+            <p class="text-muted">
+                Student complaint management system
+            </p>
+
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button class="btn btn-success">
+                <i class="fa fa-file-excel"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="fa fa-file-pdf"></i>
+            </button>
+
+            <button class="btn btn-primary">
+                <i class="fa fa-print"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-responsive">
+
+        <table class="table premium-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Complaint</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for complaint in complaints %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            #{{ complaint.id }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="student-avatar">
+
+                                {{ complaint.student.name|slice:":1" }}
+
+                            </div>
+
+                            <div>
+
+                                <h6 class="mb-0">
+                                    {{ complaint.student.name }}
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+
+                        {{ complaint.title }}
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-danger px-3 py-2">
+
+                            High
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-warning px-3 py-2">
+
+                            {{ complaint.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="progress"
+                             style="height:10px; border-radius:20px;">
+
+                            <div class="progress-bar bg-danger"
+                                 style="width:60%;"></div>
+
+                        </div>
+
+                        <small>60%</small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/admin/complaints/complaint/{{ complaint.id }}/change/"
+                               class="btn btn-sm btn-primary">
+
+                                <i class="fa fa-edit"></i>
+
+                            </a>
+
+                            <button class="btn btn-sm btn-danger">
+
+                                <i class="fa fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHARTS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Complaint Status
+                </h4>
+
+                <span class="badge bg-danger p-2">
+                    Live
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="complaintChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Monthly Complaints
+                </h4>
+
+                <span class="badge bg-primary p-2">
+                    Updated
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="trendChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-plus-circle"></i>
+
+            <h4>Add Complaint</h4>
+
+            <p>Register new hostel complaint</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-chart-pie"></i>
+
+            <h4>Complaint Analytics</h4>
+
+            <p>View complaint reports</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-shield-alt"></i>
+
+            <h4>Security Monitor</h4>
+
+            <p>Track serious complaints</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('complaintChart'), {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: ['Resolved', 'Pending', 'Rejected'],
+
+        datasets: [{
+
+            data: [24, 8, 3],
+
+            backgroundColor: [
+                '#16a34a',
+                '#f59e0b',
+                '#dc2626'
+            ],
+
+            borderWidth:0
+
+        }]
+
+    },
+
+    options: {
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+
+
+
+new Chart(document.getElementById('trendChart'), {
+
+    type:'bar',
+
+    data: {
+
+        labels:[
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun'
+        ],
+
+        datasets:[{
+
+            label:'Complaints',
+
+            data:[4,8,5,10,7,12],
+
+            backgroundColor:[
+                '#2563eb',
+                '#16a34a',
+                '#f59e0b',
+                '#dc2626',
+                '#7c3aed',
+                '#0ea5e9'
+            ],
+
+            borderRadius:10
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+</script>
+
+
+
+
+<style>
+
+.premium-header{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.premium-title{
+
+    font-size:42px;
+    font-weight:700;
+    color:#071a52;
+
+}
+
+.premium-subtitle{
+
+    color:gray;
+    font-size:18px;
+
+}
+
+.ultra-card{
+
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+}
+
+.ultra-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.blue-card{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.green-card{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.orange-card{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red-card{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.card-icon{
+
+    font-size:60px;
+    opacity:0.9;
+
+}
+
+.premium-box{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+.search-box{
+
+    background:#f4f7fb;
+    border-radius:15px;
+    padding:15px;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.search-box input{
+
+    border:none;
+    background:transparent;
+    width:100%;
+    outline:none;
+    margin-left:10px;
+
+}
+
+.premium-select{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.premium-btn{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.student-avatar{
+
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#dc2626;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:bold;
+
+    margin-right:15px;
+
+}
+
+.premium-table thead{
+
+    background:#071a52;
+    color:white;
+
+}
+
+.premium-table thead th{
+
+    padding:18px;
+
+}
+
+.premium-table tbody tr{
+
+    transition:0.3s;
+
+}
+
+.premium-table tbody tr:hover{
+
+    background:#f4f7fb;
+
+}
+
+.premium-table tbody td{
+
+    padding:18px;
+
+}
+
+.premium-action{
+
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+    transition:0.4s;
+
+}
+
+.premium-action:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.premium-action i{
+
+    font-size:60px;
+    margin-bottom:20px;
+    color:#dc2626;
+
+}
+
+</style>
+
 {% endblock %}
-```

@@ -1,115 +1,67 @@
-```html id="5s8u8x"
 {% extends 'base.html' %}
 
 {% block content %}
 
-<div class="container-fluid">
+<!-- PREMIUM DASHBOARD HEADER -->
 
-    <!-- Top Heading -->
+<div class="premium-header mb-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
 
-        <div>
-            <h2 class="fw-bold">
-                Dashboard
-            </h2>
+        <h1 class="premium-title">
+            Hostel Management Dashboard
+        </h1>
 
-            <p class="text-muted">
-                Welcome to Hostel Management System
-            </p>
-        </div>
-
-        <div>
-            <button class="btn btn-primary">
-                Today's Report
-            </button>
-        </div>
+        <p class="premium-subtitle">
+            Smart analytics and hostel administration system
+        </p>
 
     </div>
 
-    <!-- Cards -->
+    <div class="d-flex gap-3">
 
-    <div class="row g-4">
+        <button class="btn btn-light btn-lg shadow-sm">
 
-        <div class="col-md-3">
+            <i class="fa fa-bell"></i>
+            Notifications
 
-            <div class="card-box bg-blue">
+        </button>
 
-                <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary btn-lg shadow">
 
-                    <div>
-                        <h5>Total Students</h5>
-                        <h2>{{ total_students }}</h2>
-                    </div>
+            <i class="fa fa-user-shield"></i>
+            Admin Panel
 
-                    <div>
-                        <i class="fa fa-user fa-3x"></i>
-                    </div>
+        </button>
 
-                </div>
+    </div>
 
-            </div>
+</div>
 
-        </div>
 
-        <div class="col-md-3">
 
-            <div class="card-box bg-green">
 
-                <div class="d-flex justify-content-between align-items-center">
+<!-- ANALYTICS CARDS -->
 
-                    <div>
-                        <h5>Total Leaves</h5>
-                        <h2>{{ total_leaves }}</h2>
-                    </div>
+<div class="row g-4 mb-4">
 
-                    <div>
-                        <i class="fa fa-calendar fa-3x"></i>
-                    </div>
+    <div class="col-md-3">
 
-                </div>
+        <div class="ultra-card blue-card">
+
+            <div>
+
+                <h6>Total Students</h6>
+
+                <h1>{{ total_students }}</h1>
+
+                <p>+12% this month</p>
 
             </div>
 
-        </div>
+            <div class="card-icon">
 
-        <div class="col-md-3">
-
-            <div class="card-box bg-red">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-                        <h5>Complaints</h5>
-                        <h2>{{ total_complaints }}</h2>
-                    </div>
-
-                    <div>
-                        <i class="fa fa-exclamation-circle fa-3x"></i>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card-box bg-yellow">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-                        <h5>Payments</h5>
-                        <h2>{{ total_payments }}</h2>
-                    </div>
-
-                    <div>
-                        <i class="fa fa-credit-card fa-3x"></i>
-                    </div>
-
-                </div>
+                <i class="fa fa-users"></i>
 
             </div>
 
@@ -117,105 +69,77 @@
 
     </div>
 
-    <!-- Tables Section -->
 
-    <div class="row mt-5">
 
-        <!-- Recent Activities -->
+    <div class="col-md-3">
 
-        <div class="col-md-8">
+        <div class="ultra-card green-card">
 
-            <div class="table-section">
+            <div>
 
-                <h4 class="table-title">
-                    Recent Activities
-                </h4>
+                <h6>Total Leaves</h6>
 
-                <table class="table table-hover">
+                <h1>{{ total_leaves }}</h1>
 
-                    <thead class="table-dark">
+                <p>Approved Requests</p>
 
-                        <tr>
-                            <th>ID</th>
-                            <th>Module</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                        </tr>
+            </div>
 
-                    </thead>
+            <div class="card-icon">
 
-                    <tbody>
-
-                        <tr>
-                            <td>1</td>
-                            <td>Student Registration</td>
-                            <td>
-                                <span class="badge bg-success">
-                                    Completed
-                                </span>
-                            </td>
-                            <td>28 May 2026</td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>Leave Application</td>
-                            <td>
-                                <span class="badge bg-warning">
-                                    Pending
-                                </span>
-                            </td>
-                            <td>28 May 2026</td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td>Complaint Raised</td>
-                            <td>
-                                <span class="badge bg-danger">
-                                    Open
-                                </span>
-                            </td>
-                            <td>28 May 2026</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                <i class="fa fa-calendar-check"></i>
 
             </div>
 
         </div>
 
-        <!-- Quick Actions -->
+    </div>
 
-        <div class="col-md-4">
 
-            <div class="table-section">
 
-                <h4 class="table-title">
-                    Quick Actions
-                </h4>
+    <div class="col-md-3">
 
-                <div class="d-grid gap-3">
+        <div class="ultra-card red-card">
 
-                    <a href="/api/students/" class="btn btn-primary">
-                        Manage Students
-                    </a>
+            <div>
 
-                    <a href="/api/leaves/" class="btn btn-success">
-                        Manage Leaves
-                    </a>
+                <h6>Complaints</h6>
 
-                    <a href="/api/complaints/" class="btn btn-danger">
-                        Manage Complaints
-                    </a>
+                <h1>{{ total_complaints }}</h1>
 
-                    <a href="/api/payments/" class="btn btn-warning text-white">
-                        Manage Payments
-                    </a>
+                <p>Pending Issues</p>
 
-                </div>
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-exclamation-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card orange-card">
+
+            <div>
+
+                <h6>Total Payments</h6>
+
+                <h1>{{ total_payments }}</h1>
+
+                <p>Monthly Revenue</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-money-bill-wave"></i>
 
             </div>
 
@@ -225,5 +149,499 @@
 
 </div>
 
+
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="premium-box mb-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Quick Actions
+            </h3>
+
+            <p class="text-muted">
+                Access important modules quickly
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <a href="/students-ui/" class="text-decoration-none">
+
+                <div class="quick-card">
+
+                    <i class="fa fa-user-graduate"></i>
+
+                    <h5>Students</h5>
+
+                    <p>Manage Students</p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="col-md-3">
+
+            <a href="/leaves-ui/" class="text-decoration-none">
+
+                <div class="quick-card">
+
+                    <i class="fa fa-calendar-alt"></i>
+
+                    <h5>Leaves</h5>
+
+                    <p>Manage Leaves</p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="col-md-3">
+
+            <a href="/complaints-ui/" class="text-decoration-none">
+
+                <div class="quick-card">
+
+                    <i class="fa fa-exclamation-triangle"></i>
+
+                    <h5>Complaints</h5>
+
+                    <p>Track Complaints</p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="col-md-3">
+
+            <a href="/payments-ui/" class="text-decoration-none">
+
+                <div class="quick-card">
+
+                    <i class="fa fa-wallet"></i>
+
+                    <h5>Payments</h5>
+
+                    <p>Track Revenue</p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHARTS -->
+
+<div class="row g-4">
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Hostel Analytics
+                </h4>
+
+                <span class="badge bg-success p-2">
+                    Live Data
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="dashboardChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Monthly Growth
+                </h4>
+
+                <span class="badge bg-primary p-2">
+                    Updated
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="growthChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- RECENT ACTIVITY -->
+
+<div class="premium-box mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Recent Activities
+            </h3>
+
+            <p class="text-muted">
+                Latest hostel system updates
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="activity-box">
+
+        <div class="activity-item">
+
+            <i class="fa fa-user-plus text-primary"></i>
+
+            <div>
+
+                <h6 class="mb-0">
+                    New Student Registered
+                </h6>
+
+                <small class="text-muted">
+                    5 minutes ago
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="activity-item">
+
+            <i class="fa fa-money-bill text-success"></i>
+
+            <div>
+
+                <h6 class="mb-0">
+                    Payment Received
+                </h6>
+
+                <small class="text-muted">
+                    15 minutes ago
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="activity-item">
+
+            <i class="fa fa-exclamation-circle text-danger"></i>
+
+            <div>
+
+                <h6 class="mb-0">
+                    Complaint Submitted
+                </h6>
+
+                <small class="text-muted">
+                    30 minutes ago
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('dashboardChart'), {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: [
+            'Students',
+            'Leaves',
+            'Complaints',
+            'Payments'
+        ],
+
+        datasets: [{
+
+            data: [
+                {{ total_students }},
+                {{ total_leaves }},
+                {{ total_complaints }},
+                {{ total_payments }}
+            ],
+
+            backgroundColor: [
+                '#2563eb',
+                '#16a34a',
+                '#dc2626',
+                '#f59e0b'
+            ],
+
+            borderWidth:0
+
+        }]
+
+    },
+
+    options: {
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+
+
+
+new Chart(document.getElementById('growthChart'), {
+
+    type:'line',
+
+    data: {
+
+        labels:[
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun'
+        ],
+
+        datasets:[{
+
+            label:'Growth',
+
+            data:[20,35,45,60,75,90],
+
+            borderColor:'#2563eb',
+
+            backgroundColor:'rgba(37,99,235,0.1)',
+
+            fill:true,
+
+            tension:0.4
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+</script>
+
+
+
+
+<style>
+
+.premium-header{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.premium-title{
+
+    font-size:42px;
+    font-weight:700;
+    color:#071a52;
+
+}
+
+.premium-subtitle{
+
+    color:gray;
+    font-size:18px;
+
+}
+
+.ultra-card{
+
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+}
+
+.ultra-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.blue-card{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.green-card{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.orange-card{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red-card{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.card-icon{
+
+    font-size:60px;
+    opacity:0.9;
+
+}
+
+.premium-box{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+.quick-card{
+
+    background:#f8fafc;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    transition:0.4s;
+    cursor:pointer;
+
+}
+
+.quick-card:hover{
+
+    transform:translateY(-8px);
+    background:#eef4ff;
+
+}
+
+.quick-card i{
+
+    font-size:50px;
+    margin-bottom:20px;
+    color:#2563eb;
+
+}
+
+.activity-box{
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+}
+
+.activity-item{
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#f8fafc;
+
+}
+
+.activity-item i{
+
+    font-size:28px;
+
+}
+
+</style>
+
 {% endblock %}
-```

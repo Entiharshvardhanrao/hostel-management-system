@@ -1,45 +1,797 @@
-```html id="e9qfdt"
 {% extends 'base.html' %}
 
 {% block content %}
 
-<h2 class="mb-4">Payments Management</h2>
+<!-- PREMIUM HEADER -->
 
-<div class="table-section">
+<div class="premium-header mb-4">
 
-<table class="table table-hover">
+    <div>
 
-    <thead class="table-dark">
+        <h1 class="premium-title">
+            Payments Management
+        </h1>
 
-        <tr>
-            <th>ID</th>
-            <th>Student</th>
-            <th>Amount</th>
-            <th>Status</th>
-        </tr>
+        <p class="premium-subtitle">
+            Monitor hostel fee payments and revenue analytics
+        </p>
 
-    </thead>
+    </div>
 
-    <tbody>
+    <div class="d-flex gap-3">
 
-        {% for payment in payments %}
+        <button class="btn btn-light btn-lg shadow-sm">
 
-        <tr>
+            <i class="fa fa-download"></i>
+            Export
 
-            <td>{{ payment.id }}</td>
-            <td>{{ payment.student }}</td>
-            <td>{{ payment.amount }}</td>
-            <td>{{ payment.status }}</td>
+        </button>
 
-        </tr>
+        <a href="/admin/payments/payment/add/"
+           class="btn btn-warning btn-lg shadow">
 
-        {% endfor %}
+            <i class="fa fa-plus"></i>
+            Add Payment
 
-    </tbody>
+        </a>
 
-</table>
+    </div>
 
 </div>
 
+
+
+
+<!-- ANALYTICS CARDS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+
+        <div class="ultra-card green-card">
+
+            <div>
+
+                <h6>Total Revenue</h6>
+
+                <h1>₹5.2L</h1>
+
+                <p>This Month</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-money-bill-wave"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card blue-card">
+
+            <div>
+
+                <h6>Paid Fees</h6>
+
+                <h1>82%</h1>
+
+                <p>Successful Payments</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-check-circle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card orange-card">
+
+            <div>
+
+                <h6>Pending Fees</h6>
+
+                <h1>18%</h1>
+
+                <p>Pending Collection</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-clock"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card red-card">
+
+            <div>
+
+                <h6>Late Payments</h6>
+
+                <h1>6</h1>
+
+                <p>Need Attention</p>
+
+            </div>
+
+            <div class="card-icon">
+
+                <i class="fa fa-exclamation-triangle"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- SEARCH SECTION -->
+
+<div class="premium-box mb-4">
+
+    <div class="row g-3">
+
+        <div class="col-md-5">
+
+            <div class="search-box">
+
+                <i class="fa fa-search"></i>
+
+                <input type="text"
+                       placeholder="Search payments...">
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <select class="form-select premium-select">
+
+                <option>All Status</option>
+                <option>Paid</option>
+                <option>Pending</option>
+                <option>Failed</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <select class="form-select premium-select">
+
+                <option>All Months</option>
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <button class="btn btn-dark premium-btn w-100">
+
+                <i class="fa fa-filter"></i>
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- PAYMENT TABLE -->
+
+<div class="premium-box">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Payment Records
+            </h3>
+
+            <p class="text-muted">
+                Complete hostel payment transactions
+            </p>
+
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button class="btn btn-success">
+                <i class="fa fa-file-excel"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="fa fa-file-pdf"></i>
+            </button>
+
+            <button class="btn btn-primary">
+                <i class="fa fa-print"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-responsive">
+
+        <table class="table premium-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Amount</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for payment in payments %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            #{{ payment.id }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="student-avatar">
+
+                                {{ payment.student.name|slice:":1" }}
+
+                            </div>
+
+                            <div>
+
+                                <h6 class="mb-0">
+                                    {{ payment.student.name }}
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-success px-3 py-2">
+
+                            ₹ {{ payment.amount }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        UPI
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-primary px-3 py-2">
+
+                            {{ payment.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="progress"
+                             style="height:10px; border-radius:20px;">
+
+                            <div class="progress-bar bg-success"
+                                 style="width:85%;"></div>
+
+                        </div>
+
+                        <small>85%</small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/admin/payments/payment/{{ payment.id }}/change/"
+                               class="btn btn-sm btn-primary">
+
+                                <i class="fa fa-edit"></i>
+
+                            </a>
+
+                            <button class="btn btn-sm btn-danger">
+
+                                <i class="fa fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHARTS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Payment Analytics
+                </h4>
+
+                <span class="badge bg-success p-2">
+                    Live
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="paymentChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Monthly Revenue
+                </h4>
+
+                <span class="badge bg-warning p-2">
+                    Updated
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="revenueChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-credit-card"></i>
+
+            <h4>Add Payment</h4>
+
+            <p>Create new payment entry</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-chart-line"></i>
+
+            <h4>Revenue Analytics</h4>
+
+            <p>View payment reports</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-wallet"></i>
+
+            <h4>Finance Monitor</h4>
+
+            <p>Track hostel revenue</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('paymentChart'), {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: ['Paid', 'Pending', 'Failed'],
+
+        datasets: [{
+
+            data: [82, 18, 4],
+
+            backgroundColor: [
+                '#16a34a',
+                '#f59e0b',
+                '#dc2626'
+            ],
+
+            borderWidth:0
+
+        }]
+
+    },
+
+    options: {
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+
+
+
+new Chart(document.getElementById('revenueChart'), {
+
+    type:'bar',
+
+    data: {
+
+        labels:[
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun'
+        ],
+
+        datasets:[{
+
+            label:'Revenue',
+
+            data:[50000,70000,90000,60000,120000,150000],
+
+            backgroundColor:[
+                '#2563eb',
+                '#16a34a',
+                '#f59e0b',
+                '#dc2626',
+                '#7c3aed',
+                '#0ea5e9'
+            ],
+
+            borderRadius:10
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false
+
+    }
+
+});
+
+</script>
+
+
+
+
+<style>
+
+.premium-header{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.premium-title{
+
+    font-size:42px;
+    font-weight:700;
+    color:#071a52;
+
+}
+
+.premium-subtitle{
+
+    color:gray;
+    font-size:18px;
+
+}
+
+.ultra-card{
+
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+}
+
+.ultra-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.blue-card{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.green-card{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.orange-card{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red-card{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.card-icon{
+
+    font-size:60px;
+    opacity:0.9;
+
+}
+
+.premium-box{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+.search-box{
+
+    background:#f4f7fb;
+    border-radius:15px;
+    padding:15px;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.search-box input{
+
+    border:none;
+    background:transparent;
+    width:100%;
+    outline:none;
+    margin-left:10px;
+
+}
+
+.premium-select{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.premium-btn{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.student-avatar{
+
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#16a34a;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:bold;
+
+    margin-right:15px;
+
+}
+
+.premium-table thead{
+
+    background:#071a52;
+    color:white;
+
+}
+
+.premium-table thead th{
+
+    padding:18px;
+
+}
+
+.premium-table tbody tr{
+
+    transition:0.3s;
+
+}
+
+.premium-table tbody tr:hover{
+
+    background:#f4f7fb;
+
+}
+
+.premium-table tbody td{
+
+    padding:18px;
+
+}
+
+.premium-action{
+
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+    transition:0.4s;
+
+}
+
+.premium-action:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.premium-action i{
+
+    font-size:60px;
+    margin-bottom:20px;
+    color:#16a34a;
+
+}
+
+</style>
+
 {% endblock %}
-```

@@ -3,47 +3,797 @@
 
 {% block content %}
 
-<h2 class="mb-4">
-    Students Management
-</h2>
+<!-- PREMIUM HEADER -->
 
-<div class="table-section">
+<div class="premium-header mb-4">
 
-    <table class="table table-hover">
+    <div>
 
-        <thead class="table-dark">
+        <h1 class="premium-title">
+            Students Analytics Dashboard
+        </h1>
 
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Room</th>
-                <th>Department</th>
-            </tr>
+        <p class="premium-subtitle">
+            Smart hostel student management system
+        </p>
 
-        </thead>
+    </div>
 
-        <tbody>
+    <div class="d-flex gap-3">
 
-            {% for student in students %}
+        <button class="btn btn-light btn-lg shadow-sm">
+            <i class="fa fa-download"></i>
+            Export
+        </button>
 
-            <tr>
+        <a href="/admin/accounts/student/add/"
+           class="btn btn-primary btn-lg shadow">
 
-                <td>{{ student.id }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.room_number }}</td>
-                <td>{{ student.department }}</td>
+            <i class="fa fa-plus"></i>
+            Add Student
 
-            </tr>
+        </a>
 
-            {% endfor %}
-
-        </tbody>
-
-    </table>
+    </div>
 
 </div>
+
+
+
+<!-- PREMIUM STAT CARDS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+
+        <div class="ultra-card blue-card">
+
+            <div class="card-icon">
+                <i class="fa fa-users"></i>
+            </div>
+
+            <div>
+
+                <h6>Total Students</h6>
+
+                <h1>{{ students|length }}</h1>
+
+                <p>+12% this month</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card green-card">
+
+            <div class="card-icon">
+                <i class="fa fa-user-check"></i>
+            </div>
+
+            <div>
+
+                <h6>Attendance</h6>
+
+                <h1>95%</h1>
+
+                <p>Excellent performance</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card orange-card">
+
+            <div class="card-icon">
+                <i class="fa fa-bed"></i>
+            </div>
+
+            <div>
+
+                <h6>Occupied Rooms</h6>
+
+                <h1>78%</h1>
+
+                <p>52 Rooms filled</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+
+        <div class="ultra-card red-card">
+
+            <div class="card-icon">
+                <i class="fa fa-money-bill-wave"></i>
+            </div>
+
+            <div>
+
+                <h6>Fee Collection</h6>
+
+                <h1>₹5.2L</h1>
+
+                <p>Monthly revenue</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- SEARCH BAR -->
+
+<div class="premium-box mb-4">
+
+    <div class="row g-3">
+
+        <div class="col-md-5">
+
+            <div class="search-box">
+
+                <i class="fa fa-search"></i>
+
+                <input type="text"
+                       placeholder="Search students...">
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <select class="form-select premium-select">
+
+                <option>All Departments</option>
+                <option>BCA</option>
+                <option>BSC</option>
+                <option>BBA</option>
+                <option>BTECH</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <select class="form-select premium-select">
+
+                <option>All Years</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <button class="btn btn-dark w-100 premium-btn">
+
+                <i class="fa fa-filter"></i>
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- STUDENTS TABLE -->
+
+<div class="premium-box">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Students Records
+            </h3>
+
+            <p class="text-muted">
+                Complete hostel students database
+            </p>
+
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button class="btn btn-success">
+                <i class="fa fa-file-excel"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="fa fa-file-pdf"></i>
+            </button>
+
+            <button class="btn btn-primary">
+                <i class="fa fa-print"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-responsive">
+
+        <table class="table premium-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Department</th>
+                    <th>Room</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>Attendance</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            #{{ student.id }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="student-avatar">
+
+                                {{ student.name|slice:":1" }}
+
+                            </div>
+
+                            <div>
+
+                                <h6 class="mb-0">
+                                    {{ student.name }}
+                                </h6>
+
+                                <small class="text-muted">
+                                    {{ student.email }}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-dark px-3 py-2">
+                            {{ student.department }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-primary px-3 py-2">
+                            {{ student.room_number }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        Year {{ student.year }}
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-success px-3 py-2">
+                            Active
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="progress"
+                             style="height:10px; border-radius:20px;">
+
+                            <div class="progress-bar bg-success"
+                                 style="width:90%;"></div>
+
+                        </div>
+
+                        <small>90%</small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/admin/accounts/student/{{ student.id }}/change/"
+                               class="btn btn-sm btn-primary">
+
+                                <i class="fa fa-edit"></i>
+
+                            </a>
+
+                            <button class="btn btn-sm btn-danger">
+
+                                <i class="fa fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- ANALYTICS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Department Analytics
+                </h4>
+
+                <span class="badge bg-primary p-2">
+                    Live
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="departmentChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="premium-box">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h4 class="fw-bold">
+                    Monthly Growth
+                </h4>
+
+                <span class="badge bg-success p-2">
+                    Updated
+                </span>
+
+            </div>
+
+            <div style="height:350px;">
+
+                <canvas id="growthChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-user-plus"></i>
+
+            <h4>Add Student</h4>
+
+            <p>Create new hostel student</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-chart-line"></i>
+
+            <h4>Analytics</h4>
+
+            <p>View complete reports</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="premium-action">
+
+            <i class="fa fa-file-export"></i>
+
+            <h4>Export Data</h4>
+
+            <p>Generate PDF and Excel</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+new Chart(document.getElementById('departmentChart'), {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: ['BCA', 'BSC', 'BBA', 'BTECH'],
+
+        datasets: [{
+
+            data: [5, 2, 1, 3],
+
+            backgroundColor: [
+                '#2563eb',
+                '#16a34a',
+                '#dc2626',
+                '#f59e0b'
+            ],
+
+            borderWidth: 0
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+        maintainAspectRatio: false
+
+    }
+
+});
+
+
+
+
+new Chart(document.getElementById('growthChart'), {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun'
+        ],
+
+        datasets: [{
+
+            label: 'Students',
+
+            data: [10, 25, 35, 50, 65, 80],
+
+            borderColor: '#2563eb',
+
+            backgroundColor: 'rgba(37,99,235,0.1)',
+
+            fill: true,
+
+            tension: 0.4
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+        maintainAspectRatio: false
+
+    }
+
+});
+
+</script>
+
+
+
+
+
+<style>
+
+.premium-header{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.premium-title{
+
+    font-size:42px;
+    font-weight:700;
+    color:#071a52;
+
+}
+
+.premium-subtitle{
+
+    color:gray;
+    font-size:18px;
+
+}
+
+.ultra-card{
+
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+}
+
+.ultra-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.blue-card{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.green-card{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.orange-card{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red-card{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.card-icon{
+
+    font-size:60px;
+    opacity:0.9;
+
+}
+
+.premium-box{
+
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+.search-box{
+
+    background:#f4f7fb;
+    border-radius:15px;
+    padding:15px;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.search-box input{
+
+    border:none;
+    background:transparent;
+    width:100%;
+    outline:none;
+    margin-left:10px;
+
+}
+
+.premium-select{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.premium-btn{
+
+    height:58px;
+    border-radius:15px;
+
+}
+
+.student-avatar{
+
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:bold;
+
+    margin-right:15px;
+
+}
+
+.premium-table thead{
+
+    background:#071a52;
+    color:white;
+
+}
+
+.premium-table thead th{
+
+    padding:18px;
+
+}
+
+.premium-table tbody tr{
+
+    transition:0.3s;
+
+}
+
+.premium-table tbody tr:hover{
+
+    background:#f4f7fb;
+
+}
+
+.premium-table tbody td{
+
+    padding:18px;
+
+}
+
+.premium-action{
+
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+    transition:0.4s;
+
+}
+
+.premium-action:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.premium-action i{
+
+    font-size:60px;
+    margin-bottom:20px;
+    color:#2563eb;
+
+}
+
+</style>
 
 {% endblock %}
 ```
