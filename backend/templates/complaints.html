@@ -1,0 +1,45 @@
+```html id="x2t7ci"
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Complaints Management</h2>
+
+<div class="table-section">
+
+<table class="table table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Title</th>
+            <th>Status</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for complaint in complaints %}
+
+        <tr>
+
+            <td>{{ complaint.id }}</td>
+            <td>{{ complaint.student }}</td>
+            <td>{{ complaint.title }}</td>
+            <td>{{ complaint.status }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
+```

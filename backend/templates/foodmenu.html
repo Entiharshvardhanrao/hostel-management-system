@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Food Menu</h2>
+
+<div class="table-section">
+
+<table class="table table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>ID</th>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for food in foods %}
+
+        <tr>
+
+            <td>{{ food.id }}</td>
+            <td>{{ food.day }}</td>
+            <td>{{ food.breakfast }}</td>
+            <td>{{ food.lunch }}</td>
+            <td>{{ food.dinner }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

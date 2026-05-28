@@ -1,36 +1,70 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+id="vvnfr9"
+from django.shortcuts import render
 
 from accounts.models import Student
 from complaints.models import Complaint
 from leave_management.models import Leave
 from payments.models import Payment
+from food_menu.models import FoodMenu
 
 
-class DashboardAPIView(APIView):
+def dashboard_ui(request):
 
-    def get(self, request):
+    context = {
 
-        data = {
-            "total_students": Student.objects.count(),
+        'total_students': Student.objects.count(),
 
-            "total_complaints": Complaint.objects.count(),
+        'total_complaints': Complaint.objects.count(),
 
-            "pending_complaints": Complaint.objects.filter(
-                status='Pending'
-            ).count(),
+        'total_leaves': Leave.objects.count(),
 
-            "total_leaves": Leave.objects.count(),
+        'total_payments': Payment.objects.count(),
 
-            "approved_leaves": Leave.objects.filter(
-                status='Approved'
-            ).count(),
+    }
 
-            "total_payments": Payment.objects.count(),
+    return render(request, 'dashboard.html', context)
 
-            "paid_payments": Payment.objects.filter(
-                status='Paid'
-            ).count(),
-        }
 
-        return Response(data)
+def students_ui(request):
+
+    students = Student.objects.all()
+
+    return render(request, 'students.html', {
+        'students': students
+    })
+
+
+def leaves_ui(request):
+
+    leaves = Leave.objects.all()
+
+    return render(request, 'leaves.html', {
+        'leaves': leaves
+    })
+
+
+def complaints_ui(request):
+
+    complaints = Complaint.objects.all()
+
+    return render(request, 'complaints.html', {
+        'complaints': complaints
+    })
+
+
+def payments_ui(request):
+
+    payments = Payment.objects.all()
+
+    return render(request, 'payments.html', {
+        'payments': payments
+    })
+
+
+def foodmenu_ui(request):
+
+    foods = FoodMenu.objects.all()
+
+    return render(request, 'foodmenu.html', {
+        'foods': foods
+    })

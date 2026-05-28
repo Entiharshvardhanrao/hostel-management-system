@@ -1,0 +1,229 @@
+```html id="5s8u8x"
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Top Heading -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold">
+                Dashboard
+            </h2>
+
+            <p class="text-muted">
+                Welcome to Hostel Management System
+            </p>
+        </div>
+
+        <div>
+            <button class="btn btn-primary">
+                Today's Report
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Cards -->
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="card-box bg-blue">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h5>Total Students</h5>
+                        <h2>{{ total_students }}</h2>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-user fa-3x"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card-box bg-green">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h5>Total Leaves</h5>
+                        <h2>{{ total_leaves }}</h2>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-calendar fa-3x"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card-box bg-red">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h5>Complaints</h5>
+                        <h2>{{ total_complaints }}</h2>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-exclamation-circle fa-3x"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card-box bg-yellow">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+                        <h5>Payments</h5>
+                        <h2>{{ total_payments }}</h2>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-credit-card fa-3x"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Tables Section -->
+
+    <div class="row mt-5">
+
+        <!-- Recent Activities -->
+
+        <div class="col-md-8">
+
+            <div class="table-section">
+
+                <h4 class="table-title">
+                    Recent Activities
+                </h4>
+
+                <table class="table table-hover">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Module</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Student Registration</td>
+                            <td>
+                                <span class="badge bg-success">
+                                    Completed
+                                </span>
+                            </td>
+                            <td>28 May 2026</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Leave Application</td>
+                            <td>
+                                <span class="badge bg-warning">
+                                    Pending
+                                </span>
+                            </td>
+                            <td>28 May 2026</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Complaint Raised</td>
+                            <td>
+                                <span class="badge bg-danger">
+                                    Open
+                                </span>
+                            </td>
+                            <td>28 May 2026</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="col-md-4">
+
+            <div class="table-section">
+
+                <h4 class="table-title">
+                    Quick Actions
+                </h4>
+
+                <div class="d-grid gap-3">
+
+                    <a href="/api/students/" class="btn btn-primary">
+                        Manage Students
+                    </a>
+
+                    <a href="/api/leaves/" class="btn btn-success">
+                        Manage Leaves
+                    </a>
+
+                    <a href="/api/complaints/" class="btn btn-danger">
+                        Manage Complaints
+                    </a>
+
+                    <a href="/api/payments/" class="btn btn-warning text-white">
+                        Manage Payments
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```
