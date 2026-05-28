@@ -10,10 +10,11 @@ class Complaint(models.Model):
         max_length=20,
         choices=[
             ('Pending', 'Pending'),
-            ('Resolved', 'Resolved'),
+            ('Resolved', 'Resolved')
         ],
         default='Pending'
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

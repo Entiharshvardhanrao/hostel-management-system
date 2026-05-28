@@ -6,4 +6,6 @@ urlpatterns = [
 
     path('api/', include('accounts.urls')),
     path('api/', include('leave_management.urls')),
+    path('api/', include('complaints.urls')),
+    
 ]
