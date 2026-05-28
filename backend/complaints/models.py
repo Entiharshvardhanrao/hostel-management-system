@@ -1,3 +1,19 @@
 from django.db import models
+from accounts.models import Student
 
-# Create your models here.
+
+class Complaint(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('Pending', 'Pending'),
+            ('Resolved', 'Resolved'),
+        ],
+        default='Pending'
+    )
+
+    def __str__(self):
+        return self.title

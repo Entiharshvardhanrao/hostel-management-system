@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import Leave
+from .serializers import LeaveSerializer
 
-# Create your views here.
+
+class LeaveListCreateView(generics.ListCreateAPIView):
+    queryset = Leave.objects.all()
+    serializer_class = LeaveSerializer
