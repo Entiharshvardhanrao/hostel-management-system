@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/', include('complaints.urls')),
     path('api/', include('payments.urls')),
     path('api/', include('food_menu.urls')),
+    path('api/', include('dashboard.urls')),
 ]
