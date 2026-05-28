@@ -5,13 +5,17 @@ from accounts.models import Student
 class Payment(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_date = models.DateField(auto_now_add=True)
+    payment_date = models.DateField()
+    payment_method = models.CharField(max_length=50)
+
+    STATUS_CHOICES = [
+        ('Paid', 'Paid'),
+        ('Pending', 'Pending'),
+    ]
+
     status = models.CharField(
         max_length=20,
-        choices=[
-            ('Paid', 'Paid'),
-            ('Pending', 'Pending'),
-        ],
+        choices=STATUS_CHOICES,
         default='Pending'
     )
 
