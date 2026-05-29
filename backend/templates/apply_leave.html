@@ -1,68 +1,280 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Apply Leave</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        body{
+            background:#eef2f7;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .leave-container{
+            max-width:900px;
+            margin:auto;
+            padding-top:50px;
+        }
+
+        .leave-card{
+
+            background:white;
+
+            border-radius:30px;
+
+            overflow:hidden;
+
+            box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+        }
+
+        .leave-header{
+
+            background:linear-gradient(
+                135deg,
+                #071a52,
+                #2563eb
+            );
+
+            color:white;
+
+            padding:35px;
+
+        }
+
+        .leave-header h2{
+
+            font-weight:700;
+
+            margin-bottom:10px;
+
+        }
+
+        .leave-header p{
+
+            opacity:.9;
+
+            margin:0;
+
+        }
+
+        .leave-body{
+
+            padding:40px;
+
+        }
+
+        .form-label{
+
+            font-weight:600;
+
+            margin-bottom:10px;
+
+            color:#071a52;
+
+        }
+
+        .form-control{
+
+            border-radius:15px;
+
+            padding:14px;
+
+            border:1px solid #dbe3f0;
+
+        }
+
+        .form-control:focus{
+
+            box-shadow:none;
+
+            border-color:#2563eb;
+
+        }
+
+        .info-box{
+
+            background:#eff6ff;
+
+            border-left:5px solid #2563eb;
+
+            padding:15px;
+
+            border-radius:12px;
+
+            margin-bottom:25px;
+
+        }
+
+        .submit-btn{
+
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color:white;
+
+            border:none;
+
+            padding:15px 35px;
+
+            border-radius:15px;
+
+            font-weight:600;
+
+            transition:.3s;
+
+        }
+
+        .submit-btn:hover{
+
+            transform:translateY(-3px);
+
+            color:white;
+
+        }
+
+        .dashboard-btn{
+
+            border-radius:15px;
+
+            padding:15px 25px;
+
+        }
+
+    </style>
+
 </head>
 
-<body style="background:#f4f6f9;">
+<body>
 
-<div class="container mt-5">
+<div class="container leave-container">
 
-    <div class="card shadow p-4">
+    <div class="leave-card">
 
-        <h2 class="mb-4">
-            Apply Leave
-        </h2>
+        <!-- HEADER -->
 
-        <form method="POST">
+        <div class="leave-header">
 
-            {% csrf_token %}
+            <h2>
+                <i class="fa fa-calendar-plus"></i>
+                Apply Leave
+            </h2>
 
-            <div class="mb-3">
+            <p>
+                Submit your leave request to hostel administration
+            </p>
 
-                <label>From Date</label>
+        </div>
 
-                <input type="date"
-                       name="from_date"
-                       class="form-control"
-                       required>
+        <!-- BODY -->
 
-            </div>
+        <div class="leave-body">
 
-            <div class="mb-3">
+            <div class="info-box">
 
-                <label>To Date</label>
-
-                <input type="date"
-                       name="to_date"
-                       class="form-control"
-                       required>
+                <strong>Note:</strong>
+                Please provide valid dates and a clear reason for your leave request.
 
             </div>
 
-            <div class="mb-3">
+            <form method="POST">
 
-                <label>Reason</label>
+                {% csrf_token %}
 
-                <textarea
-                    name="reason"
-                    rows="5"
-                    class="form-control"
-                    required></textarea>
+                <div class="row">
 
-            </div>
+                    <div class="col-md-6 mb-4">
 
-            <button class="btn btn-primary">
+                        <label class="form-label">
 
-                Submit Leave Request
+                            <i class="fa fa-calendar-day"></i>
+                            From Date
 
-            </button>
+                        </label>
 
-        </form>
+                        <input
+                            type="date"
+                            name="from_date"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            <i class="fa fa-calendar-check"></i>
+                            To Date
+
+                        </label>
+
+                        <input
+                            type="date"
+                            name="to_date"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        <i class="fa fa-file-lines"></i>
+                        Reason
+
+                    </label>
+
+                    <textarea
+                        name="reason"
+                        rows="6"
+                        class="form-control"
+                        placeholder="Enter reason for leave..."
+                        required></textarea>
+
+                </div>
+
+                <div class="d-flex gap-3">
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        <i class="fa fa-paper-plane"></i>
+                        Submit Leave Request
+
+                    </button>
+
+                    <a href="/api/student-dashboard/"
+                       class="btn btn-dark dashboard-btn">
+
+                        <i class="fa fa-home"></i>
+                        Dashboard
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
 
@@ -70,3 +282,4 @@
 
 </body>
 </html>
+```

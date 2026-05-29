@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Student Dashboard</title>
 
@@ -12,7 +16,8 @@
     <style>
 
         body{
-            background:#f4f6f9;
+            background:#eef2f7;
+            font-family:Arial, Helvetica, sans-serif;
         }
 
         .profile-card{
@@ -25,11 +30,47 @@
 
             color:white;
 
-            border-radius:25px;
+            border-radius:30px;
 
             padding:40px;
 
             margin-bottom:30px;
+
+            box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+        }
+
+        .profile-card h2{
+            font-weight:700;
+        }
+
+        .profile-card p{
+            margin-bottom:8px;
+        }
+
+        .logout-btn{
+
+            background:white;
+
+            color:#071a52;
+
+            border:none;
+
+            padding:12px 22px;
+
+            border-radius:12px;
+
+            font-weight:600;
+
+            text-decoration:none;
+
+        }
+
+        .logout-btn:hover{
+
+            background:#f3f4f6;
+
+            color:#071a52;
 
         }
 
@@ -37,21 +78,23 @@
 
             background:white;
 
-            border-radius:20px;
+            border-radius:25px;
 
             padding:25px;
 
             text-align:center;
 
-            box-shadow:0 5px 15px rgba(0,0,0,.08);
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
 
             transition:.3s;
+
+            height:100%;
 
         }
 
         .stat-card:hover{
 
-            transform:translateY(-5px);
+            transform:translateY(-8px);
 
         }
 
@@ -63,13 +106,67 @@
 
         }
 
+        .stat-card h3{
+
+            font-size:35px;
+
+            font-weight:bold;
+
+        }
+
+        .action-card{
+
+            background:white;
+
+            border-radius:25px;
+
+            padding:30px;
+
+            margin-top:30px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+        }
+
         .action-btn{
 
-            padding:15px;
+            padding:16px;
 
             border-radius:15px;
 
-            font-weight:bold;
+            font-weight:600;
+
+        }
+
+        .activity-card{
+
+            background:white;
+
+            border-radius:25px;
+
+            padding:30px;
+
+            margin-top:30px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+        }
+
+        .activity-item{
+
+            padding:15px;
+
+            background:#f8fafc;
+
+            border-radius:12px;
+
+            margin-bottom:12px;
+
+        }
+
+        .activity-item i{
+
+            margin-right:10px;
 
         }
 
@@ -85,60 +182,93 @@
 
     <div class="profile-card">
 
-        <h2>
-            Welcome {{ student.name }} 👋
-        </h2>
+        <div class="d-flex justify-content-between align-items-center">
 
-        <p>
-            {{ student.department }}
-            |
-            Year {{ student.year }}
-        </p>
+            <div>
 
-        <h5>
-            Room Number:
-            {{ student.room_number }}
-        </h5>
-
-    </div>
-
-
-
-    <!-- STATS -->
-
-    <div class="row g-4 mb-4">
-
-        <div class="col-md-6">
-
-            <div class="stat-card">
-
-                <i class="fa fa-exclamation-circle text-danger"></i>
-
-                <h3>
-                    {{ complaint_count }}
-                </h3>
+                <h2>
+                    Welcome {{ student.name }} 👋
+                </h2>
 
                 <p>
-                    Complaints
+                    <i class="fa fa-envelope"></i>
+                    {{ student.email }}
                 </p>
+
+                <p>
+                    <i class="fa fa-building"></i>
+                    {{ student.department }}
+                </p>
+
+                <p>
+                    <i class="fa fa-graduation-cap"></i>
+                    Year {{ student.year }}
+                </p>
+
+                <p>
+                    <i class="fa fa-bed"></i>
+                    Room {{ student.room_number }}
+                </p>
+
+            </div>
+
+            <div>
+
+                <a href="/api/student-logout/"
+                   class="logout-btn">
+
+                    <i class="fa fa-right-from-bracket"></i>
+                    Logout
+
+                </a>
 
             </div>
 
         </div>
 
-        <div class="col-md-6">
+    </div>
+
+    <!-- STATS -->
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <i class="fa fa-triangle-exclamation text-danger"></i>
+
+                <h3>{{ complaint_count }}</h3>
+
+                <p>Total Complaints</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
 
             <div class="stat-card">
 
                 <i class="fa fa-calendar-check text-primary"></i>
 
-                <h3>
-                    {{ leave_count }}
-                </h3>
+                <h3>{{ leave_count }}</h3>
 
-                <p>
-                    Leave Requests
-                </p>
+                <p>Total Leave Requests</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <i class="fa fa-credit-card text-success"></i>
+
+                <h3>{{ payment_count }}</h3>
+
+                <p>Total Payments</p>
 
             </div>
 
@@ -146,61 +276,133 @@
 
     </div>
 
+    <!-- QUICK ACTIONS -->
 
-
-    <!-- ACTIONS -->
-
-    <div class="card p-4 shadow">
+    <div class="action-card">
 
         <h3 class="mb-4">
+
             Quick Actions
+
         </h3>
 
         <div class="row g-3">
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <a href="/api/raise-complaint/"
                    class="btn btn-danger w-100 action-btn">
 
+                    <i class="fa fa-triangle-exclamation"></i>
                     Raise Complaint
 
                 </a>
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <a href="/api/student-complaints/"
                    class="btn btn-warning w-100 action-btn">
 
+                    <i class="fa fa-list"></i>
                     My Complaints
 
                 </a>
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <a href="/api/apply-leave/"
                    class="btn btn-primary w-100 action-btn">
 
+                    <i class="fa fa-calendar-plus"></i>
                     Apply Leave
 
                 </a>
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <a href="/api/my-leaves/"
                    class="btn btn-success w-100 action-btn">
 
+                    <i class="fa fa-calendar-check"></i>
                     My Leaves
 
                 </a>
 
             </div>
+
+            <div class="col-md-4">
+
+                <a href="/api/student-payments/"
+                   class="btn btn-secondary w-100 action-btn">
+
+                    <i class="fa fa-credit-card"></i>
+                    My Payments
+
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <a href="/api/student-food-menu/"
+                   class="btn btn-info w-100 action-btn">
+
+                    <i class="fa fa-utensils"></i>
+                    Food Menu
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="activity-card">
+
+        <h3 class="mb-4">
+
+            Recent Activity
+
+        </h3>
+
+        <div class="activity-item">
+
+            <i class="fa fa-circle-check text-success"></i>
+
+            Complaint Module Available
+
+        </div>
+
+        <div class="activity-item">
+
+            <i class="fa fa-circle-check text-primary"></i>
+
+            Leave Management Active
+
+        </div>
+
+        <div class="activity-item">
+
+            <i class="fa fa-circle-check text-warning"></i>
+
+            Payment Tracking Enabled
+
+        </div>
+
+        <div class="activity-item">
+
+            <i class="fa fa-circle-check text-danger"></i>
+
+            Weekly Food Menu Available
 
         </div>
 
@@ -209,4 +411,5 @@
 </div>
 
 </body>
+
 </html>
