@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/', include('food_menu.urls')),
     path('api/', include('dashboard.urls')),
     path('', include('dashboard.urls')),
+    path('', include('accounts.urls')),
 ]
