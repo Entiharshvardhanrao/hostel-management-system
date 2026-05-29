@@ -6,7 +6,8 @@ from .views import (
     student_complaint,
     student_complaints,
     apply_leave,
-    my_leaves
+    my_leaves,
+    student_logout
 )
 
 urlpatterns = [
@@ -38,6 +39,10 @@ urlpatterns = [
     path(
         'my-leaves/',
         my_leaves
+    ),
+    path(
+        'student-logout/',
+        student_logout
     ),
 
 ]

@@ -122,3 +122,8 @@ def my_leaves(request):
             "leaves": leaves
         }
     )
+def student_logout(request):
+
+    request.session.flush()
+
+    return redirect('/api/student-login/')
