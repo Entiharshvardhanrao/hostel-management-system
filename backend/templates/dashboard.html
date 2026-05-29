@@ -3,482 +3,188 @@
 
 {% block content %}
 
-<!-- HERO SECTION -->
+<div class="container-fluid">
 
-<div class="premium-hero mb-5">
+    <!-- HEADER -->
 
-    <div class="hero-overlay"></div>
+    <div class="dashboard-header mb-4">
 
-    <div class="row align-items-center">
+        <div class="row align-items-center">
 
-        <div class="col-lg-8">
+            <div class="col-lg-8">
 
-            <div class="hero-content">
-
-                <span class="dashboard-badge">
-                    <i class="fa fa-chart-line"></i>
-                    Smart Hostel Analytics
-                </span>
-
-                <h1 class="hero-title">
-                    Premium Hostel
-                    <span>Management Dashboard</span>
+                <h1 class="dashboard-title">
+                    Hostel Management Dashboard
                 </h1>
 
-                <p class="hero-subtitle">
-
-                    Monitor students, payments, leaves,
-                    complaints and hostel operations
-                    in real-time with intelligent insights.
-
+                <p class="dashboard-subtitle">
+                    Welcome to your hostel management control center
                 </p>
 
-                <div class="hero-buttons">
-
-                    <button class="btn hero-btn-primary">
-
-                        <i class="fa fa-bolt"></i>
-                        Quick Access
-
-                    </button>
-
-                    <button class="btn hero-btn-dark">
-
-                        <i class="fa fa-chart-pie"></i>
-                        Analytics
-
-                    </button>
-
-                </div>
-
             </div>
 
-        </div>
+            <div class="col-lg-4 text-end">
 
-        <div class="col-lg-4 text-end">
-
-            <div class="hero-circle">
-
-                <i class="fa fa-building"></i>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- STATS -->
-
-<div class="row g-4 mb-5">
-
-    <!-- STUDENTS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="ultra-card ultra-blue">
-
-            <div class="ultra-top">
-
-                <div>
-
-                    <p>Total Students</p>
-
-                    <h2>{{ total_students }}</h2>
-
-                </div>
-
-                <div class="ultra-icon">
-
-                    <i class="fa fa-user-graduate"></i>
-
-                </div>
-
-            </div>
-
-            <div class="progress premium-progress">
-
-                <div class="progress-bar bg-light"
-                    style="width:85%"></div>
-
-            </div>
-
-            <small>
-                85% hostel occupancy
-            </small>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- LEAVES -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="ultra-card ultra-green">
-
-            <div class="ultra-top">
-
-                <div>
-
-                    <p>Total Leaves</p>
-
-                    <h2>{{ total_leaves }}</h2>
-
-                </div>
-
-                <div class="ultra-icon">
-
-                    <i class="fa fa-calendar-check"></i>
-
-                </div>
-
-            </div>
-
-            <div class="progress premium-progress">
-
-                <div class="progress-bar bg-light"
-                    style="width:45%"></div>
-
-            </div>
-
-            <small>
-                Leave applications active
-            </small>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- COMPLAINTS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="ultra-card ultra-red">
-
-            <div class="ultra-top">
-
-                <div>
-
-                    <p>Complaints</p>
-
-                    <h2>{{ total_complaints }}</h2>
-
-                </div>
-
-                <div class="ultra-icon">
-
-                    <i class="fa fa-triangle-exclamation"></i>
-
-                </div>
-
-            </div>
-
-            <div class="progress premium-progress">
-
-                <div class="progress-bar bg-light"
-                    style="width:30%"></div>
-
-            </div>
-
-            <small>
-                Pending issues
-            </small>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- PAYMENTS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="ultra-card ultra-yellow">
-
-            <div class="ultra-top">
-
-                <div>
-
-                    <p>Payments</p>
-
-                    <h2>{{ total_payments }}</h2>
-
-                </div>
-
-                <div class="ultra-icon">
-
-                    <i class="fa fa-wallet"></i>
-
-                </div>
-
-            </div>
-
-            <div class="progress premium-progress">
-
-                <div class="progress-bar bg-light"
-                    style="width:70%"></div>
-
-            </div>
-
-            <small>
-                Fee collection status
-            </small>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- ANALYTICS -->
-
-<div class="row g-4 mb-5">
-
-    <!-- MAIN GRAPH -->
-
-    <div class="col-lg-8">
-
-        <div class="glass-card">
-
-            <div class="card-head">
-
-                <div>
-
-                    <h3>System Analytics</h3>
-
-                    <p>Hostel statistics overview</p>
-
-                </div>
-
-                <div class="live-status">
-
-                    <span class="live-dot"></span>
-                    Live
-
-                </div>
-
-            </div>
-
-            <div class="chart-wrapper">
-
-                <canvas id="analyticsChart"></canvas>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- DONUT -->
-
-    <div class="col-lg-4">
-
-        <div class="glass-card">
-
-            <div class="card-head">
-
-                <div>
-
-                    <h3>Distribution</h3>
-
-                    <p>Modules activity ratio</p>
-
-                </div>
-
-            </div>
-
-            <div class="donut-wrapper">
-
-                <canvas id="donutChart"></canvas>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- TABLE + ACTIONS -->
-
-<div class="row g-4">
-
-    <!-- TABLE -->
-
-    <div class="col-lg-8">
-
-        <div class="glass-card">
-
-            <div class="card-head">
-
-                <div>
-
-                    <h3>Recent Activities</h3>
-
-                    <p>Latest hostel operations</p>
-
-                </div>
-
-                <button class="btn btn-primary">
-
-                    View All
-
+                <button class="btn btn-light px-4 py-2">
+                    Admin Panel
                 </button>
 
             </div>
 
-            <table class="table premium-table">
+        </div>
 
-                <thead>
+    </div>
 
-                    <tr>
+    <!-- STATS -->
 
-                        <th>ID</th>
-                        <th>Activity</th>
-                        <th>Status</th>
-                        <th>Date</th>
+    <div class="row g-4 mb-4">
 
-                    </tr>
+        <div class="col-lg-3 col-md-6">
 
-                </thead>
+            <div class="stats-card blue">
 
-                <tbody>
+                <i class="fa fa-user-graduate"></i>
 
-                    <tr>
+                <h2>{{ total_students }}</h2>
 
-                        <td>#01</td>
-                        <td>Student Registration</td>
+                <p>Total Students</p>
 
-                        <td>
+            </div>
 
-                            <span class="badge bg-success">
-                                Completed
-                            </span>
+        </div>
 
-                        </td>
+        <div class="col-lg-3 col-md-6">
 
-                        <td>28 May 2026</td>
+            <div class="stats-card green">
 
-                    </tr>
+                <i class="fa fa-calendar-check"></i>
 
-                    <tr>
+                <h2>{{ total_leaves }}</h2>
 
-                        <td>#02</td>
-                        <td>Leave Request</td>
+                <p>Total Leaves</p>
 
-                        <td>
+            </div>
 
-                            <span class="badge bg-warning text-dark">
-                                Pending
-                            </span>
+        </div>
 
-                        </td>
+        <div class="col-lg-3 col-md-6">
 
-                        <td>28 May 2026</td>
+            <div class="stats-card red">
 
-                    </tr>
+                <i class="fa fa-triangle-exclamation"></i>
 
-                    <tr>
+                <h2>{{ total_complaints }}</h2>
 
-                        <td>#03</td>
-                        <td>Complaint Raised</td>
+                <p>Complaints</p>
 
-                        <td>
+            </div>
 
-                            <span class="badge bg-danger">
-                                Open
-                            </span>
+        </div>
 
-                        </td>
+        <div class="col-lg-3 col-md-6">
 
-                        <td>28 May 2026</td>
+            <div class="stats-card yellow">
 
-                    </tr>
+                <i class="fa fa-credit-card"></i>
 
-                </tbody>
+                <h2>{{ total_payments }}</h2>
 
-            </table>
+                <p>Payments</p>
+
+            </div>
 
         </div>
 
     </div>
 
+    <!-- GRAPH + QUICK ACTIONS -->
 
+    <div class="row g-4">
 
-    <!-- QUICK ACTIONS -->
+        <div class="col-lg-6">
 
-    <div class="col-lg-4">
+            <div class="dashboard-card">
 
-        <div class="glass-card">
+                <h4 class="mb-3">
+                    Analytics Overview
+                </h4>
 
-            <div class="card-head mb-4">
+                <div style="height:180px;">
 
-                <div>
-
-                    <h3>Quick Actions</h3>
-
-                    <p>Fast access modules</p>
+                    <canvas id="dashboardChart"></canvas>
 
                 </div>
 
             </div>
 
-            <div class="d-grid gap-3">
+        </div>
 
-                <a href="/students-ui/"
-                    class="btn premium-action blue-btn">
+        <div class="col-lg-6">
 
-                    <i class="fa fa-user"></i>
-                    Students
+            <div class="dashboard-card">
 
-                </a>
+                <h4 class="mb-3">
+                    Quick Actions
+                </h4>
 
-                <a href="/leaves-ui/"
-                    class="btn premium-action green-btn">
+                <div class="row g-3">
 
-                    <i class="fa fa-calendar"></i>
-                    Leaves
+                    <div class="col-md-6">
 
-                </a>
+                        <a href="/students-ui/"
+                           class="btn btn-primary w-100 action-btn">
 
-                <a href="/complaints-ui/"
-                    class="btn premium-action red-btn">
+                            Students
 
-                    <i class="fa fa-circle-exclamation"></i>
-                    Complaints
+                        </a>
 
-                </a>
+                    </div>
 
-                <a href="/payments-ui/"
-                    class="btn premium-action yellow-btn">
+                    <div class="col-md-6">
 
-                    <i class="fa fa-credit-card"></i>
-                    Payments
+                        <a href="/leaves-ui/"
+                           class="btn btn-success w-100 action-btn">
 
-                </a>
+                            Leaves
 
-                <a href="/foodmenu-ui/"
-                    class="btn premium-action dark-btn">
+                        </a>
 
-                    <i class="fa fa-utensils"></i>
-                    Food Menu
+                    </div>
 
-                </a>
+                    <div class="col-md-6">
+
+                        <a href="/complaints-ui/"
+                           class="btn btn-danger w-100 action-btn">
+
+                            Complaints
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <a href="/payments-ui/"
+                           class="btn btn-warning w-100 action-btn">
+
+                            Payments
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <a href="/foodmenu-ui/"
+                           class="btn btn-dark w-100 action-btn">
+
+                            Food Menu
+
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -487,83 +193,16 @@
     </div>
 
 </div>
-
-
-
-<!-- CHART JS -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 
-const analyticsChart = new Chart(
-    document.getElementById('analyticsChart'),
-    {
-        type: 'line',
-
-        data: {
-
-            labels: [
-                'Students',
-                'Leaves',
-                'Complaints',
-                'Payments'
-            ],
-
-            datasets: [{
-
-                label: 'Statistics',
-
-                data: [
-                    {{ total_students }},
-                    {{ total_leaves }},
-                    {{ total_complaints }},
-                    {{ total_payments }}
-                ],
-
-                borderColor: '#2563eb',
-
-                backgroundColor: 'rgba(37,99,235,0.1)',
-
-                tension: 0.4,
-
-                fill: true,
-
-                borderWidth: 4,
-
-                pointBackgroundColor: '#2563eb',
-
-                pointRadius: 6
-
-            }]
-        },
-
-        options: {
-
-            responsive:true,
-
-            maintainAspectRatio:false,
-
-            plugins:{
-
-                legend:{
-                    display:false
-                }
-
-            }
-
-        }
-
-    }
-);
-
-
-
-const donutChart = new Chart(
-    document.getElementById('donutChart'),
+new Chart(
+    document.getElementById('dashboardChart'),
     {
 
-        type:'doughnut',
+        type:'bar',
 
         data:{
 
@@ -575,6 +214,8 @@ const donutChart = new Chart(
             ],
 
             datasets:[{
+
+                label:'Hostel Data',
 
                 data:[
                     {{ total_students }},
@@ -590,7 +231,7 @@ const donutChart = new Chart(
                     '#f59e0b'
                 ],
 
-                borderWidth:0
+                borderRadius:10
 
             }]
 
@@ -599,19 +240,12 @@ const donutChart = new Chart(
         options:{
 
             responsive:true,
-
             maintainAspectRatio:false,
 
-            cutout:'75%',
-
             plugins:{
-
                 legend:{
-
-                    position:'bottom'
-
+                    display:false
                 }
-
             }
 
         }
@@ -621,15 +255,9 @@ const donutChart = new Chart(
 
 </script>
 
-
-
 <style>
 
-/* HERO */
-
-.premium-hero{
-
-    position:relative;
+.dashboard-header{
 
     background:linear-gradient(
         135deg,
@@ -637,387 +265,111 @@ const donutChart = new Chart(
         #2563eb
     );
 
-    border-radius:35px;
-
-    padding:60px;
-
-    overflow:hidden;
-
     color:white;
 
-    box-shadow:0 20px 50px rgba(0,0,0,0.15);
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
 
 }
 
-.hero-overlay{
+.dashboard-title{
 
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    background:rgba(255,255,255,0.08);
-
-    border-radius:50%;
-
-    top:-150px;
-    right:-150px;
-
-}
-
-.dashboard-badge{
-
-    background:rgba(255,255,255,0.15);
-
-    padding:10px 20px;
-
-    border-radius:40px;
-
-    display:inline-block;
-
-    margin-bottom:20px;
-
-    font-size:14px;
-
-}
-
-.hero-title{
-
-    font-size:60px;
+    font-size:42px;
 
     font-weight:800;
 
-    line-height:1.1;
-
 }
 
-.hero-title span{
-
-    color:#facc15;
-
-}
-
-.hero-subtitle{
-
-    margin-top:20px;
+.dashboard-subtitle{
 
     font-size:18px;
 
-    color:#dbeafe;
-
-    max-width:650px;
+    opacity:.9;
 
 }
 
-.hero-buttons{
-
-    margin-top:30px;
-
-    display:flex;
-
-    gap:20px;
-
-}
-
-.hero-btn-primary{
-
-    background:white;
-
-    color:#071a52;
-
-    padding:14px 30px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
-}
-
-.hero-btn-dark{
-
-    background:rgba(255,255,255,0.1);
+.stats-card{
 
     color:white;
-
-    padding:14px 30px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
-    border:1px solid rgba(255,255,255,0.2);
-
-}
-
-.hero-circle{
-
-    width:220px;
-
-    height:220px;
-
-    background:rgba(255,255,255,0.12);
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:90px;
-
-}
-
-
-
-/* ULTRA CARDS */
-
-.ultra-card{
-
-    border-radius:28px;
 
     padding:30px;
-
-    color:white;
-
-    box-shadow:0 15px 40px rgba(0,0,0,0.12);
-
-    transition:0.4s;
-
-}
-
-.ultra-card:hover{
-
-    transform:translateY(-10px);
-
-}
-
-.ultra-blue{
-
-    background:linear-gradient(135deg,#2563eb,#1e40af);
-
-}
-
-.ultra-green{
-
-    background:linear-gradient(135deg,#16a34a,#166534);
-
-}
-
-.ultra-red{
-
-    background:linear-gradient(135deg,#dc2626,#991b1b);
-
-}
-
-.ultra-yellow{
-
-    background:linear-gradient(135deg,#f59e0b,#b45309);
-
-}
-
-.ultra-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.ultra-top h2{
-
-    font-size:52px;
-
-    font-weight:800;
-
-}
-
-.ultra-icon{
-
-    font-size:55px;
-
-    opacity:0.2;
-
-}
-
-.premium-progress{
-
-    height:10px;
-
-    margin:18px 0;
 
     border-radius:20px;
 
-}
+    text-align:center;
 
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
 
-
-/* GLASS CARD */
-
-.glass-card{
-
-    background:rgba(255,255,255,0.9);
-
-    backdrop-filter:blur(15px);
-
-    border-radius:30px;
-
-    padding:30px;
-
-    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+    transition:.3s;
 
 }
 
-.card-head{
+.stats-card:hover{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
+    transform:translateY(-5px);
 
 }
 
-.card-head h3{
+.stats-card i{
 
-    font-size:28px;
+    font-size:35px;
 
-    font-weight:700;
-
-    color:#071a52;
+    margin-bottom:15px;
 
 }
 
-.card-head p{
+.stats-card h2{
 
-    color:#64748b;
+    font-size:40px;
 
-}
-
-.chart-wrapper{
-
-    height:320px;
+    font-weight:bold;
 
 }
 
-.donut-wrapper{
+.blue{
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
 
-    height:320px;
+.green{
+    background:linear-gradient(135deg,#16a34a,#166534);
+}
+
+.red{
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.yellow{
+    background:linear-gradient(135deg,#f59e0b,#b45309);
+}
+
+.dashboard-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    height:100%;
 
 }
 
+.action-btn{
 
+    padding:14px;
 
-/* LIVE */
+    border-radius:12px;
 
-.live-status{
-
-    background:#dcfce7;
-
-    color:#16a34a;
-
-    padding:10px 20px;
-
-    border-radius:30px;
-
-    font-weight:700;
-
-}
-
-.live-dot{
-
-    width:10px;
-
-    height:10px;
-
-    background:#16a34a;
-
-    border-radius:50%;
-
-    display:inline-block;
-
-    margin-right:8px;
-
-}
-
-
-
-/* TABLE */
-
-.premium-table thead{
-
-    background:#071a52;
-
-    color:white;
-
-}
-
-.premium-table thead th{
-
-    padding:18px;
-
-    border:none;
-
-}
-
-.premium-table tbody td{
-
-    padding:18px;
-
-}
-
-
-
-/* ACTION BUTTONS */
-
-.premium-action{
-
-    padding:16px;
-
-    border-radius:18px;
-
-    color:white;
-
-    font-weight:700;
-
-    font-size:17px;
-
-}
-
-.blue-btn{
-
-    background:#2563eb;
-
-}
-
-.green-btn{
-
-    background:#16a34a;
-
-}
-
-.red-btn{
-
-    background:#dc2626;
-
-}
-
-.yellow-btn{
-
-    background:#f59e0b;
-
-}
-
-.dark-btn{
-
-    background:#0f172a;
+    font-weight:600;
 
 }
 
 </style>
 
+{% endblock %}
+```
